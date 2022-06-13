@@ -9,18 +9,20 @@ import Department from './Container/Departments/Department';
 import Doctor from './Container/Doctors/Doctor';
 import Home from './Container/Home';
 import Login from './Container/Login/Login';
+import PrivateRoute from './Route/PrivateRoute';
+import PublicRoute from './Route/PublicRoute';
 
 function App() {
   return (
     <>
       <Header />
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/Department" component={Department} />
-        <Route exact path="/Doctors" component={Doctor} />
-        <Route exact path="/About" component={About} />
-        <Route exact path="/Contact" component={Contact} />
-        <Route exact path="/Login" component={Login} />
+        <PublicRoute exact path="/" component={Home} />
+        <PublicRoute exact path="/Department" component={Department} />
+        <PublicRoute exact path="/Doctors" component={Doctor} />
+        <PrivateRoute exact path="/About" component={About} />
+        <PrivateRoute exact path="/Contact" component={Contact} />
+        <PublicRoute restricted={true} exact path="/Login" component={Login} />
       </Switch>
       <Footer />
     </>
