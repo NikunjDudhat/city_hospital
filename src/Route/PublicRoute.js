@@ -4,7 +4,7 @@ import { isLogin } from '../utils';
 
 function PublicRoute({component : Component, restricted= false, ...rest}) {
     return (
-        <Route {...rest} render = {props => (
+        <Route {...rest} render={props => (
             isLogin() && restricted ? 
                 <Redirect to={"/"} /> : <Component {...props} />
         )}

@@ -2,7 +2,6 @@ import { Form, Formik, useFormik } from 'formik';
 import React, { useState } from 'react';
 import { Button, FormGroup, Input, Label } from 'reactstrap';
 import * as yup from 'yup';
-import { isLogin } from '../../utils';
 
 function Login(props) {
     const [useType, setUseType] = useState("Login");
