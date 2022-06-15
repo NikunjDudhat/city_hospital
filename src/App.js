@@ -1,6 +1,5 @@
 
-import { Route } from 'react-router-dom';
-import { Switch } from 'react-router-dom/cjs/react-router-dom.min';
+import { Route, Switch } from 'react-router-dom';
 import Footer from './Components/Footer/Footer';
 import Header from './Components/Header/Header';
 import About from './Container/About/About';
@@ -12,6 +11,8 @@ import Home from './Container/Home';
 import Login from './Container/Login/Login';
 import PrivateRoute from './route/PrivateRoute';
 import PublicRoute from './route/PublicRoute';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+import ListData from './Container/Appointment/ListData';
 
 
 function App() {
@@ -25,7 +26,8 @@ function App() {
         <PrivateRoute exact path="/About" component={About} />
         <PublicRoute exact path="/Contact" component={Contact} />
         <PublicRoute  restricted={true} exact path="/Login" component={Login} />
-        <PublicRoute  restricted={true} exact path="/Appointment" component={Appointment} />
+        <PrivateRoute exact path="/Appointment" component={Appointment} />
+        <PrivateRoute exact path="/List_data" component={ListData} />
       </Switch>
       <Footer />
     </>

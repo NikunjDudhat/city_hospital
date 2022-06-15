@@ -1,8 +1,13 @@
+// import { TextField } from '@mui/material';
 import { Form, Formik, useFormik } from 'formik';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
+import Tabs from '../Tab/Tabs';
 
 function Appointment(props) {
+    const history = useHistory()
+    
 
     let schema = yup.object().shape({
         name: yup.string().required("please enter name"),
@@ -19,10 +24,39 @@ function Appointment(props) {
             phone: '',
             date: '',
             department: '',
+            message: '',
         },
         validationSchema: schema,
-        onSubmit: values => {
-            console.log(JSON.stringify(values, null, 2));
+        onSubmit: (values, { resetForm }) => {
+
+            const {
+                name,
+                email,
+                phone,
+                date,
+                department,
+                message
+            } = values;
+            let Data = {
+                name,
+                email,
+                phone,
+                date,
+                department,
+                message
+            }
+            let appoinData = JSON.parse(localStorage.getItem("appointment"));
+
+            if(appoinData == null){
+                localStorage.setItem("appointment", JSON.stringify([Data]))
+            }else{
+                appoinData.push(Data)
+                localStorage.setItem("appointment", JSON.stringify(appoinData))
+            }
+            console.log(Data);
+
+            resetForm();
+            history.push("/List_data");
         },
     });
 
@@ -30,12 +64,14 @@ function Appointment(props) {
         <main id="main">
             <section id="appointment" className="appointment">
                 <div className="container">
+                    {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
                     <div className="section-title">
                         <h2>Make an Appointment</h2>
                         <p>Aenean enim orci, suscipit vitae sodales ac, semper in ex. Nunc aliquam eget nibh eu euismod. Donec dapibus
                             blandit quam volutpat sollicitudin. Fusce tincidunt sit amet ex in volutpat. Donec lacinia finibus tortor.
                             Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
                     </div>
+                    <Tabs/>
                     <Formik values={formik}>
                         <Form key={formik} onSubmit={formik.handleSubmit} action method="post" role="form" className="php-email-form">
                             <div className="row">
@@ -99,7 +135,7 @@ function Appointment(props) {
                                 <div className="col-md-4 form-group mt-3">
                                     <select name="department" id="department" className="form-select" onChange={formik.handleChange}
                                         value={formik.values.select}>
-                                        <option value>Select Department</option>
+                                        <option disabled selected>Select Department</option>
                                         <option value="Department 1">Department 1</option>
                                         <option value="Department 2">Department 2</option>
                                         <option value="Department 3">Department 3</option>
