@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 function Header(props) {
+    const [userLogin, setuserLogin] = useState(false);
+
+    useEffect(
+        ()=>{
+            if(sessionStorage.getItem("user")){
+                console.log(true);
+                setuserLogin(true)
+            }else{
+                console.log(false);
+                setuserLogin(false)
+            }
+        },[]
+    )
+
     return (
         <div className="main-header">
             <div id="topbar" className="d-flex align-items-center fixed-top">
@@ -46,8 +60,12 @@ function Header(props) {
                         </ul>
                         <i className="bi bi-list mobile-nav-toggle" />
                     </nav>
-                    <NavLink to={"/Appointment"} className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
-                        Appointment</NavLink>
+                    {
+                        userLogin ? 
+                        <NavLink to={"/Appointment"} className="appointment-btn scrollto"><span className="d-none d-md-inline">Make an</span>
+                        Appointment</NavLink> : null
+                    }
+                    
                     {/* <a href="#" className="appointment-btn scrollto">
                         <span className="d-none d-md-inline">Login/ Signup</span>
                     </a> */}

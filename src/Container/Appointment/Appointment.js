@@ -3,6 +3,7 @@ import { Form, Formik, useFormik } from 'formik';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
+import InputBox from '../../Components/InputBox/InputBox';
 import Tabs from '../Tab/Tabs';
 
 function Appointment(props) {
@@ -60,6 +61,10 @@ function Appointment(props) {
         },
     });
 
+    const {handleChange, handleSubmit, errors} = formik;
+
+    console.log(errors);
+
     return (
         <main id="main">
             <section id="appointment" className="appointment">
@@ -73,22 +78,19 @@ function Appointment(props) {
                     </div>
                     <Tabs/>
                     <Formik values={formik}>
-                        <Form key={formik} onSubmit={formik.handleSubmit} action method="post" role="form" className="php-email-form">
+                        <Form onSubmit={handleSubmit} className="php-email-form">
                             <div className="row">
                                 <div className="col-md-4 form-group">
-                                    <input
+                                    <InputBox
                                         type="text"
                                         name="name"
                                         className="form-control"
                                         id="name"
                                         placeholder="Your Name"
-                                        data-rule="minlen:4"
-                                        data-msg="Please enter at least 4 chars"
-                                        onChange={formik.handleChange}
+                                        error = {Boolean(errors.name)}
+                                        errorMessages = {errors.name}
+                                        onChange={handleChange}
                                         value={formik.values.name} />
-                                    {
-                                        formik.errors.name ? <p className='error'>{formik.errors.name}</p> : null
-                                    }
                                 </div>
                                 <div className="col-md-4 form-group mt-3 mt-md-0">
                                     <input
@@ -97,11 +99,10 @@ function Appointment(props) {
                                         name="email"
                                         id="email"
                                         placeholder="Your Email"
-                                        onChange={formik.handleChange}
+                                        error = {Boolean(errors.email)}
+                                        errorMessages = {errors.email}
+                                        onChange={handleChange}
                                         value={formik.values.email} />
-                                    {
-                                        formik.errors.email ? <p className='error'>{formik.errors.email}</p> : null
-                                    }
                                 </div>
                                 <div className="col-md-4 form-group mt-3 mt-md-0">
                                     <input
@@ -111,38 +112,33 @@ function Appointment(props) {
                                         id="phone"
                                         maxLength={10}
                                         placeholder="Your Phone"
-                                        onChange={formik.handleChange}
+                                        error = {Boolean(errors.phone)}
+                                        errorMessages = {errors.phone}
+                                        onChange={handleChange}
                                         value={formik.values.phone} />
-                                    {
-                                        formik.errors.phone ? <p className='error'>{formik.errors.phone}</p> : null
-                                    }
                                 </div>
                             </div>
                             <div className="row">
                                 <div className="col-md-4 form-group mt-3">
                                     <input
-                                        type="datetime"
+                                        type="date"
                                         name="date"
                                         className="form-control datepicker"
                                         id="date"
                                         placeholder="Appointment Date"
-                                        onChange={formik.handleChange}
+                                        error = {Boolean(errors.date)}
+                                        errorMessages = {errors.date}
+                                        onChange={handleChange}
                                         value={formik.values.date} />
-                                    {
-                                        formik.errors.date ? <p className='error'>{formik.errors.date}</p> : null
-                                    }
                                 </div>
                                 <div className="col-md-4 form-group mt-3">
-                                    <select name="department" id="department" className="form-select" onChange={formik.handleChange}
-                                        value={formik.values.select}>
+                                    <select name="department" id="department" className="form-select" onChange={handleChange}
+                                        value={formik.values.select} error = {Boolean(errors.department)} errorMessages = {errors.department}>
                                         <option disabled selected>Select Department</option>
                                         <option value="Department 1">Department 1</option>
                                         <option value="Department 2">Department 2</option>
                                         <option value="Department 3">Department 3</option>
                                     </select>
-                                    {
-                                        formik.errors.department ? <p className='error'>{formik.errors.department}</p> : null
-                                    }
                                 </div>
                             </div>
                             <div className="form-group mt-3">
@@ -151,7 +147,9 @@ function Appointment(props) {
                                     name="message" rows={5}
                                     placeholder="Message (Optional)"
                                     defaultValue={""}
-                                    onChange={formik.handleChange}
+                                    error = {Boolean(errors.message)}
+                                    errorMessages = {errors.message}
+                                    onChange={handleChange}
                                     value={formik.values.message} />
                             </div>
                             <div className="mb-3">
