@@ -63,9 +63,27 @@ function Appointment(props) {
         },
     });
 
-    const {handleChange, handleSubmit, values, errors} = formik;
+    const {handleChange, handleSubmit,handleBlur, values, errors, touched} = formik;
 
     console.log(errors);
+    const currencies = [
+        {
+          value: 'USD',
+          label: '$',
+        },
+        {
+          value: 'EUR',
+          label: '€',
+        },
+        {
+          value: 'BTC',
+          label: '฿',
+        },
+        {
+          value: 'JPY',
+          label: '¥',
+        },
+      ];
 
     return (
         <main id="main">
@@ -82,47 +100,92 @@ function Appointment(props) {
                     <Formik values={formik}>
                         <Form onSubmit={handleSubmit} className="php-email-form">
                         <div className="row">
-                                <div className="col-md-4">
-                                    <InputBox
-                                        type="text"
-                                        name="name"
-                                        id="name"
-                                        placeholder="Your Name"
-                                        label="Name"
-                                        error = {Boolean(errors.name)}
-                                        errorMessages= {errors.name}
-                                        onChange={handleChange}
-                                        value={values.name}
-                                    />
-                                </div>
-                                <div className="col-md-4">
-                                    <InputBox
-                                        type="text"
-                                        name="email"
-                                        id="email"
-                                        placeholder="Your email"
-                                        label="Email"
-                                        error = {Boolean(errors.email)}
-                                        errorMessages= {errors.email}
-                                        onChange={handleChange}
-                                        value={values.email}
-                                    />
-                                </div>
-                                <div className="col-md-4">  
-                                    <InputBox
-                                        type="text"
-                                        name="phone"
-                                        id="phone"
-                                        placeholder="Your phone"
-                                        error = {Boolean(errors.phone)}
-                                        label="phone"
-                                        errorMessages= {errors.phone}
-                                        onChange={handleChange}
-                                        value={values.phone}
-                                    />
-                                </div> 
+                            <div className="col-md-4 mb-3">
+                                <InputBox
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    placeholder="Your Name"
+                                    label="Name"
+                                    error = {Boolean(errors.name && touched.name)}
+                                    errorMessages= {errors.name}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
                             </div>
-                            
+                            <div className="col-md-4 mb-3">
+                                <InputBox
+                                    type="text"
+                                    name="email"
+                                    id="email"
+                                    placeholder="Your email"
+                                    label="Email"
+                                    error = {Boolean(errors.email && touched.email)}
+                                    errorMessages= {errors.email}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                            </div>
+                            <div className="col-md-4 mb-3">  
+                                <InputBox
+                                    type="text"
+                                    name="phone"
+                                    id="phone"
+                                    placeholder="Your phone"
+                                    error = {Boolean(errors.phone && touched.phone)}
+                                    label="phone"
+                                    errorMessages= {errors.phone}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                            </div> 
+                        </div>
+                        <div className="row">
+                            <div className="col-md-4 mb-3">
+                            <InputBox
+                                    type="text"
+                                    name="date"
+                                    id="date"
+                                    placeholder="Date"
+                                    label="Date"
+                                    error = {Boolean(errors.date && touched.date)}
+                                    errorMessages= {errors.date}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                />
+                            </div>
+                            <div className="col-md-4 mb-3">
+                                <InputBox 
+                                    type="select" 
+                                    name="department" 
+                                    id="department"
+                                    label="Department"
+                                    error = {Boolean(errors.department && touched.department)} 
+                                    errorMessages = {errors.department}
+                                    onChange={handleChange} 
+                                    onBlur={handleBlur}>
+                                    <option disabled selected>Select Department</option>
+                                    <option value="Department 1">Department 1</option>
+                                    <option value="Department 2">Department 2</option>
+                                    <option value="Department 3">Department 3</option>
+                                </InputBox>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-md-12 mb-3">
+                                <InputBox
+                                        type="textarea"
+                                        name="message" 
+                                        label="Message"
+                                        rows={5}
+                                        placeholder="Message (Optional)"
+                                        error = {Boolean(errors.message && touched.message)}
+                                        errorMessages = {errors.message}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur} />
+                            </div>
+                        </div>
+
                             {/* <div className="row">
                                 <div className="col-md-4 form-group">
                                     <InputBox
