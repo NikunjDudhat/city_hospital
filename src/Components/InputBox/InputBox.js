@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { FormFeedbackBox, InputBoxStyle } from './inputbox.style';
+import { FormFeedbackBox, InputBoxsStyle, InputBoxStyle } from './inputbox.style';
 
 function InputBox({children, error = false, errorMessages = '', ...rest}) {
     return (
         <>
-                <InputBoxStyle {...rest} >
+                <InputBoxsStyle {...rest} >
                     {children}
-                </InputBoxStyle>
+                </InputBoxsStyle>
                 <FormFeedbackBox error={error}>
                     {errorMessages}
                 </FormFeedbackBox>
