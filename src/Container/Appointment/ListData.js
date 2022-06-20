@@ -2,6 +2,8 @@
 import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import Tabs from '../Tab/Tabs';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { IconButton } from '@mui/material';
 
 function ListData(props) {
     const [data, setData] = useState([]);
@@ -14,7 +16,9 @@ function ListData(props) {
         }
     }
 
-  
+    const handleClickDOpen = () => {
+
+    }
 
     useEffect(
         () => {
@@ -30,6 +34,20 @@ function ListData(props) {
         { field: 'department', headerName: 'Department', width: 130 },
         { field: 'date', headerName: 'Date', width: 130 },
         { field: 'message', headerName: 'Message', width: 130 },
+        {
+            field: 'action',
+            headerName: 'Action',
+            width: 130,
+            renderCell: (params) => {
+                return (
+                    <>
+                        <IconButton onClick={() => handleClickDOpen(params.id)} aria-label="delete">
+                            <DeleteIcon />
+                        </IconButton>
+                    </>
+                )
+            }
+        },
     ]
     
 
