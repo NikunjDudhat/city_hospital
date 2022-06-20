@@ -1,5 +1,5 @@
 // import { TextField } from '@mui/material';
-import { TextField } from '@mui/material';
+import { MenuItem, TextField } from '@mui/material';
 import { Form, Formik, useFormik } from 'formik';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
@@ -33,6 +33,7 @@ function Appointment(props) {
 
             console.log(values);
             const {
+                id,
                 name,
                 email,
                 phone,
@@ -41,6 +42,7 @@ function Appointment(props) {
                 message
             } = values;
             let Data = {
+                id: Math.floor(Math.random() * 1000),
                 name,
                 email,
                 phone,
@@ -66,22 +68,23 @@ function Appointment(props) {
     const {handleChange, handleSubmit,handleBlur, values, errors, touched} = formik;
 
     console.log(errors);
+
     const currencies = [
         {
-          value: 'USD',
-          label: '$',
+          value: 'Department 1',
+          label: 'Department 1',
         },
         {
-          value: 'EUR',
-          label: '€',
+          value: 'Department 2',
+          label: 'Department 2',
         },
         {
-          value: 'BTC',
-          label: '฿',
+          value: 'Department 3',
+          label: 'Department 3',
         },
         {
-          value: 'JPY',
-          label: '¥',
+          value: 'Department 4',
+          label: 'Department 4',
         },
       ];
 
@@ -131,6 +134,7 @@ function Appointment(props) {
                                     type="text"
                                     name="phone"
                                     id="phone"
+                                    maxLength={10}
                                     placeholder="Your phone"
                                     error = {Boolean(errors.phone && touched.phone)}
                                     label="phone"
@@ -164,10 +168,11 @@ function Appointment(props) {
                                     errorMessages = {errors.department}
                                     onChange={handleChange} 
                                     onBlur={handleBlur}>
-                                    <option disabled selected>Select Department</option>
-                                    <option value="Department 1">Department 1</option>
-                                    <option value="Department 2">Department 2</option>
-                                    <option value="Department 3">Department 3</option>
+                                    {currencies.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </option>
+                                    ))}
                                 </InputBox>
                             </div>
                         </div>
@@ -186,7 +191,8 @@ function Appointment(props) {
                             </div>
                         </div>
 
-                            {/* <div className="row">
+
+                            {/*<div className="row">
                                 <div className="col-md-4 form-group">
                                     <InputBox
                                         type="text"

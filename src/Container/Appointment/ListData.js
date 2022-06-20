@@ -1,10 +1,37 @@
 // import { TextField } from '@mui/material';
-import { Form, Formik, useFormik } from 'formik';
-import React from 'react';
-import * as yup from 'yup';
+import { DataGrid } from '@mui/x-data-grid';
+import React, { useEffect, useState } from 'react';
 import Tabs from '../Tab/Tabs';
 
 function ListData(props) {
+    const [data, setData] = useState([]);
+
+    const loadData = () => {
+        let localData = JSON.parse(localStorage.getItem("appointment"));
+
+        if (localData !== null) {
+            setData(localData);
+        }
+    }
+
+  
+
+    useEffect(
+        () => {
+            loadData();
+        },[]
+    )
+
+    const columns = [
+        { field: 'id', headerName: 'Id', width: 130 },
+        { field: 'name', headerName: 'Name', width: 130 },
+        { field: 'email', headerName: 'Email', width: 130 },
+        { field: 'phone', headerName: 'Phone', width: 130 },
+        { field: 'department', headerName: 'Department', width: 130 },
+        { field: 'date', headerName: 'Date', width: 130 },
+        { field: 'message', headerName: 'Message', width: 130 },
+    ]
+    
 
     return (
         <main id="main">
@@ -18,6 +45,16 @@ function ListData(props) {
                             Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
                     </div>
                     <Tabs/>
+                    <div style={{ height: 400, width: '100%' }}>
+                        <DataGrid
+                            rows={data}
+                            columns={columns}
+                            pageSize={5}
+                            rowsPerPageOptions={[5]}
+                            checkboxSelection
+                        />
+                    </div>
+                    
                 </div>
             </section>
         </main>
