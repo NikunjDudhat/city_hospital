@@ -3,10 +3,17 @@ import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import Tabs from '../Tab/Tabs';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { IconButton } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton } from '@mui/material';
+import { Button } from 'reactstrap';
+import EditIcon from '@mui/icons-material/Edit';
+import { useHistory } from 'react-router-dom';
+
 
 function ListData(props) {
     const [data, setData] = useState([]);
+    const [Dopen, setDOpen] = useState(false);
+    const [Did, setDid] = useState('');
+    const history = useHistory()
 
     const loadData = () => {
         let localData = JSON.parse(localStorage.getItem("appointment"));
@@ -16,8 +23,32 @@ function ListData(props) {
         }
     }
 
-    const handleClickDOpen = () => {
+    const handleClose = () => {
+        setDOpen(false);
+      };
 
+    const handleClickDOpen = (id) => {
+        console.log(id);
+
+        setDOpen(true);
+        setDid(id);
+        
+    }
+
+    const handleDelete = () => {
+        console.log(Did);
+       let localData = JSON.parse(localStorage.getItem("appointment"));
+
+       let DFilter = localData.filter((d,i) => d.id != Did);
+
+       localStorage.setItem("appointment", JSON.stringify(DFilter))
+       loadData();
+       setDOpen(false);
+    }
+
+    const handleClickEOpen = (params) => {
+        console.log(params.row);
+        history.push("/Appointment");
     }
 
     useEffect(
@@ -44,6 +75,10 @@ function ListData(props) {
                         <IconButton onClick={() => handleClickDOpen(params.id)} aria-label="delete">
                             <DeleteIcon />
                         </IconButton>
+
+                        <IconButton onClick={() => handleClickEOpen(params)} aria-label="delete">
+                            <EditIcon />
+                        </IconButton>
                     </>
                 )
             }
@@ -69,13 +104,29 @@ function ListData(props) {
                             columns={columns}
                             pageSize={5}
                             rowsPerPageOptions={[5]}
-                            checkboxSelection
                         />
                     </div>
-                    
                 </div>
             </section>
-        </main>
+            <Dialog
+                open={Dopen}
+                keepMounted
+                onClose={handleClose}
+                aria-describedby="alert-dialog-slide-description"
+            >
+                <DialogTitle>{"Use Google's location service?"}</DialogTitle>
+                <DialogContent>
+                <DialogContentText id="alert-dialog-slide-description">
+                    Let Google help apps determine location. This means sending anonymous
+                    location data to Google, even when no apps are running.
+                </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleClose}>Disagree</Button>
+                <Button onClick={handleDelete}>Agree</Button>
+                </DialogActions>
+            </Dialog>
+        </main>        
 
     );
 }

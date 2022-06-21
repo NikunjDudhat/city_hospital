@@ -1,7 +1,7 @@
 // import { TextField } from '@mui/material';
 import { MenuItem, TextField } from '@mui/material';
 import { Form, Formik, useFormik } from 'formik';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import InputBox from '../../Components/InputBox/InputBox';
@@ -68,6 +68,11 @@ function Appointment(props) {
     const {handleChange, handleSubmit,handleBlur, values, errors, touched} = formik;
 
     console.log(errors);
+    const EditData = () => {
+        console.log();
+
+
+    }
 
     const currencies = [
         {
@@ -87,6 +92,12 @@ function Appointment(props) {
           label: 'Department 4',
         },
       ];
+
+      useEffect(
+        ()=> {
+            EditData()
+        },[]
+      )
 
     return (
         <main id="main">
