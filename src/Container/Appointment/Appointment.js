@@ -1,7 +1,7 @@
 // import { TextField } from '@mui/material';
 import { MenuItem, TextField } from '@mui/material';
 import { Form, Formik, useFormik } from 'formik';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import InputBox from '../../Components/InputBox/InputBox';
@@ -9,6 +9,7 @@ import Tabs from '../Tab/Tabs';
 
 function Appointment(props) {
     const history = useHistory()
+    const [update, setUpdate] = useState(false);
     
 
     let schema = yup.object().shape({
@@ -30,47 +31,79 @@ function Appointment(props) {
         },
         validationSchema: schema,
         onSubmit: (values, { resetForm }) => {
+            if(update){
+                handleUpdate(values)
+            } else{
+                console.log(values);
+                const {
+                    id,
+                    name,
+                    email,
+                    phone,
+                    date,
+                    department,
+                    message
+                } = values;
+                let Data = {
+                    id: Math.floor(Math.random() * 1000),
+                    name,
+                    email,
+                    phone,
+                    date,
+                    department,
+                    message
+                }
+                let appoinData = JSON.parse(localStorage.getItem("appointment"));
 
-            console.log(values);
-            const {
-                id,
-                name,
-                email,
-                phone,
-                date,
-                department,
-                message
-            } = values;
-            let Data = {
-                id: Math.floor(Math.random() * 1000),
-                name,
-                email,
-                phone,
-                date,
-                department,
-                message
-            }
-            let appoinData = JSON.parse(localStorage.getItem("appointment"));
+                if(appoinData == null){
+                    localStorage.setItem("appointment", JSON.stringify([Data]))
+                }else{
+                    appoinData.push(Data)
+                    localStorage.setItem("appointment", JSON.stringify(appoinData))
+                }
+                console.log(Data);
 
-            if(appoinData == null){
-                localStorage.setItem("appointment", JSON.stringify([Data]))
-            }else{
-                appoinData.push(Data)
-                localStorage.setItem("appointment", JSON.stringify(appoinData))
-            }
-            console.log(Data);
-
-            resetForm();
-            history.push("/List_data");
+                resetForm();
+                history.push("/List_data");
+            }    
         },
     });
 
     const {handleChange, handleSubmit,handleBlur, values, errors, touched} = formik;
 
     console.log(errors);
-    const EditData = () => {
-        console.log();
 
+    const EditData = () => {
+        let localData = JSON.parse(localStorage.getItem('appointment'));
+
+        if(localData !== null && props.location.state){
+            let UFilter = localData.filter((u) => u.id === props.location.state.id)
+            console.log(UFilter);
+            formik.setValues(UFilter[0])
+            setUpdate(true)
+        }        
+    }
+
+    const handleUpdate = (data) => {
+        console.log(data);
+
+        let localData = JSON.parse(localStorage.getItem("appointment"));
+
+        console.log(localData);
+
+        // let ufd = localData.map((u) => id == id)
+
+        let ufd = localData.map((u) => {
+            if(u.id == data.id){
+                return data
+            }else{
+                return u
+            }
+        })
+
+        localStorage.setItem('appointment', JSON.stringify(ufd));
+        formik.resetForm()
+        history.push("/List_data");
 
     }
 
@@ -121,6 +154,7 @@ function Appointment(props) {
                                     id="name"
                                     placeholder="Your Name"
                                     label="Name"
+                                    value= {values.name}
                                     error = {Boolean(errors.name && touched.name)}
                                     errorMessages= {errors.name}
                                     onChange={handleChange}
@@ -134,6 +168,7 @@ function Appointment(props) {
                                     id="email"
                                     placeholder="Your email"
                                     label="Email"
+                                    value= {values.email}
                                     error = {Boolean(errors.email && touched.email)}
                                     errorMessages= {errors.email}
                                     onChange={handleChange}
@@ -147,8 +182,9 @@ function Appointment(props) {
                                     id="phone"
                                     maxLength={10}
                                     placeholder="Your phone"
-                                    error = {Boolean(errors.phone && touched.phone)}
                                     label="phone"
+                                    value= {values.phone}
+                                    error = {Boolean(errors.phone && touched.phone)}
                                     errorMessages= {errors.phone}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
@@ -158,11 +194,12 @@ function Appointment(props) {
                         <div className="row">
                             <div className="col-md-4 mb-3">
                             <InputBox
-                                    type="text"
+                                    type="date"
                                     name="date"
                                     id="date"
                                     placeholder="Date"
                                     label="Date"
+                                    value= {values.date}
                                     error = {Boolean(errors.date && touched.date)}
                                     errorMessages= {errors.date}
                                     onChange={handleChange}
@@ -175,6 +212,7 @@ function Appointment(props) {
                                     name="department" 
                                     id="department"
                                     label="Department"
+                                    value= {values.department}
                                     error = {Boolean(errors.department && touched.department)} 
                                     errorMessages = {errors.department}
                                     onChange={handleChange} 
@@ -194,6 +232,7 @@ function Appointment(props) {
                                         name="message" 
                                         label="Message"
                                         rows={5}
+                                        value= {values.message}
                                         placeholder="Message (Optional)"
                                         error = {Boolean(errors.message && touched.message)}
                                         errorMessages = {errors.message}
@@ -283,7 +322,10 @@ function Appointment(props) {
                                 <div className="error-message" />
                                 <div className="sent-message">Your appointment request has been sent successfully. Thank you!</div>
                             </div>
-                            <div className="text-center"><button type="submit">Submit</button></div>
+                            {
+                                update ? <div className="text-center"><button type="submit">Update</button></div> :
+                                <div className="text-center"><button type="submit">Submit</button></div>
+                            }
                         </Form>
                     </Formik>
                 </div>

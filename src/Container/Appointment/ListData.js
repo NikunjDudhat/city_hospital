@@ -46,9 +46,9 @@ function ListData(props) {
        setDOpen(false);
     }
 
-    const handleClickEOpen = (params) => {
-        console.log(params.row);
-        history.push("/Appointment");
+    const handleClickEOpen = (id) => {
+        history.push("/Appointment", {"id" : id});
+        console.log(id);
     }
 
     useEffect(
@@ -76,7 +76,7 @@ function ListData(props) {
                             <DeleteIcon />
                         </IconButton>
 
-                        <IconButton onClick={() => handleClickEOpen(params)} aria-label="delete">
+                        <IconButton onClick={() => handleClickEOpen(params.id)} aria-label="delete">
                             <EditIcon />
                         </IconButton>
                     </>

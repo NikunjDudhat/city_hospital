@@ -7,10 +7,8 @@ function Header(props) {
     useEffect(
         ()=>{
             if(sessionStorage.getItem("user")){
-                console.log(true);
                 setuserLogin(true)
             }else{
-                console.log(false);
                 setuserLogin(false)
             }
         },[]
