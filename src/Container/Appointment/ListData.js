@@ -3,10 +3,11 @@ import { DataGrid } from '@mui/x-data-grid';
 import React, { useEffect, useState } from 'react';
 import Tabs from '../Tab/Tabs';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, TextField } from '@mui/material';
 import { Button } from 'reactstrap';
 import EditIcon from '@mui/icons-material/Edit';
 import { useHistory } from 'react-router-dom';
+import InputBox from '../../Components/InputBox/InputBox';
 
 
 function ListData(props) {
@@ -14,6 +15,7 @@ function ListData(props) {
     const [Dopen, setDOpen] = useState(false);
     const [Did, setDid] = useState('');
     const history = useHistory()
+    const [filterData, setFilterData] = useState([]);
 
     const loadData = () => {
         let localData = JSON.parse(localStorage.getItem("appointment"));
@@ -84,6 +86,23 @@ function ListData(props) {
             }
         },
     ]
+
+    const handleSearch = (val) => {
+        let localData = JSON.parse(localStorage.getItem('appointment'));
+
+        let sData = localData.filter((s) => (
+            s.id.toString().includes(val) ||
+            s.name.toString().toLowerCase().includes(val.toLowerCase()) ||
+            s.phone.toString().includes(val) ||
+            s.email.toString().includes(val) ||
+            s.department.toString().toLowerCase().includes(val.toLowerCase()) ||
+            s.date.toString().includes(val) ||
+            s.message.toString().includes(val)
+        ))
+        setFilterData(sData)
+    }
+
+    const fData = filterData.length > 0 ? filterData : data
     
 
     return (
@@ -98,9 +117,17 @@ function ListData(props) {
                             Curabitur luctus eleifend odio. Phasellus placerat mi et suscipit pulvinar.</p>
                     </div>
                     <Tabs/>
+
+                        <div className='search_box'>
+                            <TextField 
+                                id="search" 
+                                label="Search"
+                                onChange={(e) => handleSearch(e.target.value)}
+                            />
+                        </div>
                     <div style={{ height: 400, width: '100%' }}>
                         <DataGrid
-                            rows={data}
+                            rows={fData}
                             columns={columns}
                             pageSize={5}
                             rowsPerPageOptions={[5]}
