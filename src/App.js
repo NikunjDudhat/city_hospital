@@ -24,7 +24,7 @@ function App() {
 
   return (
     <>
-    <Provider stroe={store}>
+    <Provider store={store}>
       <Header />
       <Switch>
         <PublicRoute exact path="/" component={Home} />
