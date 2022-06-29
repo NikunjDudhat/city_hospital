@@ -1,6 +1,9 @@
-import { createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
+import thunk from 'redux-thunk'
 import { rootRedux } from './Reducer/Index'
 
 export const countorStore = () => {
- let Store = createStore(rootRedux)
+ let store = createStore(rootRedux, applyMiddleware(thunk))
+
+ return store;
 }
