@@ -9,8 +9,8 @@ import Department from './Container/Departments/Department';
 import Doctor from './Container/Doctors/Doctor';
 import Home from './Container/Home';
 import Login from './Container/Login/Login';
-import PrivateRoute from './route/PrivateRoute';
-import PublicRoute from './route/PublicRoute';
+import PrivateRoute from './Route/PrivateRoute';
+import PublicRoute from './Route/PublicRoute';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import ListData from './Container/Appointment/ListData';
 import { Provider } from 'react-redux'

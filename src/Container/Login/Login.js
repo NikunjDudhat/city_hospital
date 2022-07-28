@@ -2,9 +2,12 @@ import { Form, Formik, useFormik } from 'formik';
 import React, { useState } from 'react';
 import { Button, FormGroup, Input, Label } from 'reactstrap';
 import * as yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { LoginUser } from '../../Redux/Action/auth.action';
 
 function Login(props) {
     const [useType, setUseType] = useState("Login");
+    const dispatch = useDispatch();
 
     let Login = {
         email: yup.string().email("please enter valid email").required("please enter email"),
@@ -45,8 +48,9 @@ function Login(props) {
     }
 
     // const schema = yup.object().shape(Login);
-    const handleLogin = () => {
+    const handleLogin = (v) => {
         sessionStorage.setItem("user", "123");
+        dispatch(LoginUser(v));        
     }
 
     const formik = useFormik({
@@ -57,7 +61,7 @@ function Login(props) {
 
             if (useType === "Login") {
                 // console.log("Successfully Login 👍");
-                handleLogin();
+                handleLogin(values);
             } else if (useType === "SignUp") {
                 console.log("Successfully SignUp 👍");
             } else if (useType === "forgetPassowrd") {
