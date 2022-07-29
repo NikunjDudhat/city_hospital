@@ -7,7 +7,7 @@ const initialState = {
     error: ''
 }
 
-export const CounterReducer = (state= initialState, action) => {
+export const LoginReducer = (state= initialState, action) => {
     switch(action.type){
         case ActionType.EMAIL_VERIFY : 
             return {

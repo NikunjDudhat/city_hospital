@@ -3,7 +3,6 @@ import { LoginApi } from '../../common/api/login.api';
 import * as ActionType from '../ActionType'
 
 
-// worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function* loginsaga(action) {
    try {
       const user = yield call(LoginApi(), action.payload);
@@ -13,10 +12,6 @@ function* loginsaga(action) {
    }
 }
 
-/*
-  Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
-  Allows concurrent fetches of user.
-*/
 function* watchsaga() {
   yield takeEvery(ActionType.LOGIN_USER, loginsaga);
 }
