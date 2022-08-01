@@ -71,7 +71,6 @@ function Login(props) {
         },
     });
 
-    console.log(formik.errors.email);
 
     return (
         <main id="main">
