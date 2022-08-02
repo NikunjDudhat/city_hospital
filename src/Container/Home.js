@@ -58,42 +58,42 @@ function Home(props) {
                             <div className="col-lg-4 col-md-6 d-flex align-items-stretch">
                                 <div className="icon-box">
                                     <div className="icon"><i className="fas fa-hospital-alt" /></div>
-                                    <h4><a href>24x7 Emergency Available</a></h4>
+                                    <h4><a href={""}>24x7 Emergency Available</a></h4>
                                     <p>Nullam accumsan, velit et porta consequat, purus leo congue risus</p>
                                 </div>
                             </div>
                             <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
                                 <div className="icon-box">
                                     <div className="icon"><i className="fas fa-bed" /></div>
-                                    <h4><a href>40+ Bed Facilities</a></h4>
+                                    <h4><a href={""}>40+ Bed Facilities</a></h4>
                                     <p>Pellentesque id felis elit. Pellentesque blandit sem a nisi dictum</p>
                                 </div>
                             </div>
                             <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
                                 <div className="icon-box">
                                     <div className="icon"><i className="fas fa-hospital-user" /></div>
-                                    <h4><a href>Cardiogram Machine</a></h4>
+                                    <h4><a href={""}>Cardiogram Machine</a></h4>
                                     <p>Donec lacinia finibus tortor. Curabitur luctus eleifend odio.</p>
                                 </div>
                             </div>
                             <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
                                 <div className="icon-box">
                                     <div className="icon"><i className="fas fa-dna" /></div>
-                                    <h4><a href>X-ray and Sonography</a></h4>
+                                    <h4><a href={""}>X-ray and Sonography</a></h4>
                                     <p>Aliquam auctor felis ut sem elementum, ac rutrum turpis venenatis.</p>
                                 </div>
                             </div>
                             <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
                                 <div className="icon-box">
                                     <div className="icon"><i className="fas fa-wheelchair" /></div>
-                                    <h4><a href>Semi Special, Special and Delux Room Available</a></h4>
+                                    <h4><a href={""}>Semi Special, Special and Delux Room Available</a></h4>
                                     <p>Etiam in massa eu neque euismod consectetur.</p>
                                 </div>
                             </div>
                             <div className="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
                                 <div className="icon-box">
                                     <div className="icon"><i className="fas fa-notes-medical" /></div>
-                                    <h4><a href>Medical</a></h4>
+                                    <h4><a href={""}>Medical</a></h4>
                                     <p>Morbi vulputate, tortor nec pellentesque molestie</p>
                                 </div>
                             </div>
@@ -108,7 +108,7 @@ function Home(props) {
                                 <div className="swiper-slide">
                                     <div className="testimonial-wrap">
                                         <div className="testimonial-item">
-                                            <img src="assets/img/testimonials/testimonials-1.jpg" className="testimonial-img" alt />
+                                            <img src="assets/img/testimonials/testimonials-1.jpg" className="testimonial-img" alt="testimonials" />
                                             <h3>Jacob Wilsson</h3>
                                             <h4>Writer</h4>
                                             <p>
@@ -125,7 +125,7 @@ function Home(props) {
                                 <div className="swiper-slide">
                                     <div className="testimonial-wrap">
                                         <div className="testimonial-item">
-                                            <img src="assets/img/testimonials/testimonials-2.jpg" className="testimonial-img" alt />
+                                            <img src="assets/img/testimonials/testimonials-2.jpg" className="testimonial-img" alt="testimonials" />
                                             <h3>Ava Smith</h3>
                                             <h4>Artist</h4>
                                             <p>
@@ -141,7 +141,7 @@ function Home(props) {
                                 <div className="swiper-slide">
                                     <div className="testimonial-wrap">
                                         <div className="testimonial-item">
-                                            <img src="assets/img/testimonials/testimonials-3.jpg" className="testimonial-img" alt />
+                                            <img src="assets/img/testimonials/testimonials-3.jpg" className="testimonial-img" alt="testimonials" />
                                             <h3>Abigail Martin</h3>
                                             <h4>Teacher</h4>
                                             <p>
@@ -158,7 +158,7 @@ function Home(props) {
                                 <div className="swiper-slide">
                                     <div className="testimonial-wrap">
                                         <div className="testimonial-item">
-                                            <img src="assets/img/testimonials/testimonials-4.jpg" className="testimonial-img" alt />
+                                            <img src="assets/img/testimonials/testimonials-4.jpg" className="testimonial-img" alt="testimonials" />
                                             <h3>Alexander Tremblay</h3>
                                             <h4>Designer</h4>
                                             <p>
@@ -174,7 +174,7 @@ function Home(props) {
                                 <div className="swiper-slide">
                                     <div className="testimonial-wrap">
                                         <div className="testimonial-item">
-                                            <img src="assets/img/testimonials/testimonials-5.jpg" className="testimonial-img" alt />
+                                            <img src="assets/img/testimonials/testimonials-5.jpg" className="testimonial-img" alt="testimonials" />
                                             <h3>Jayden Brown</h3>
                                             <h4>Entrepreneur</h4>
                                             <p>
@@ -205,56 +205,56 @@ function Home(props) {
                             <div className="col-lg-3 col-md-4">
                                 <div className="gallery-item">
                                     <a href="assets/img/gallery/gallery-1.jpg" className="galelry-lightbox">
-                                        <img src="assets/img/gallery/gallery-1.jpg" alt className="img-fluid" />
+                                        <img src="assets/img/gallery/gallery-1.jpg" alt="gallery" className="img-fluid" />
                                     </a>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-4">
                                 <div className="gallery-item">
                                     <a href="assets/img/gallery/gallery-2.jpg" className="galelry-lightbox">
-                                        <img src="assets/img/gallery/gallery-2.jpg" alt className="img-fluid" />
+                                        <img src="assets/img/gallery/gallery-2.jpg" alt="gallery" className="img-fluid" />
                                     </a>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-4">
                                 <div className="gallery-item">
                                     <a href="assets/img/gallery/gallery-3.jpg" className="galelry-lightbox">
-                                        <img src="assets/img/gallery/gallery-3.jpg" alt className="img-fluid" />
+                                        <img src="assets/img/gallery/gallery-3.jpg" alt="gallery" className="img-fluid" />
                                     </a>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-4">
                                 <div className="gallery-item">
                                     <a href="assets/img/gallery/gallery-4.jpg" className="galelry-lightbox">
-                                        <img src="assets/img/gallery/gallery-4.jpg" alt className="img-fluid" />
+                                        <img src="assets/img/gallery/gallery-4.jpg" alt="gallery" className="img-fluid" />
                                     </a>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-4">
                                 <div className="gallery-item">
                                     <a href="assets/img/gallery/gallery-5.jpg" className="galelry-lightbox">
-                                        <img src="assets/img/gallery/gallery-5.jpg" alt className="img-fluid" />
+                                        <img src="assets/img/gallery/gallery-5.jpg" alt="gallery" className="img-fluid" />
                                     </a>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-4">
                                 <div className="gallery-item">
                                     <a href="assets/img/gallery/gallery-6.jpg" className="galelry-lightbox">
-                                        <img src="assets/img/gallery/gallery-6.jpg" alt className="img-fluid" />
+                                        <img src="assets/img/gallery/gallery-6.jpg" alt="gallery" className="img-fluid" />
                                     </a>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-4">
                                 <div className="gallery-item">
                                     <a href="assets/img/gallery/gallery-7.jpg" className="galelry-lightbox">
-                                        <img src="assets/img/gallery/gallery-7.jpg" alt className="img-fluid" />
+                                        <img src="assets/img/gallery/gallery-7.jpg" alt="gallery" className="img-fluid" />
                                     </a>
                                 </div>
                             </div>
                             <div className="col-lg-3 col-md-4">
                                 <div className="gallery-item">
                                     <a href="assets/img/gallery/gallery-8.jpg" className="galelry-lightbox">
-                                        <img src="assets/img/gallery/gallery-8.jpg" alt className="img-fluid" />
+                                        <img src="assets/img/gallery/gallery-8.jpg" alt="gallery" className="img-fluid" />
                                     </a>
                                 </div>
                             </div>
