@@ -22,12 +22,12 @@ export const LoginApi = (data) => {
               onAuthStateChanged(auth, (user) => {
                 if (user) {
                   if(user.emailVerified){
-                    console.log("Email Successfully!");
+                    resolve({payload : "Email Successfully!"});
                   }else{
-                    console.log("Please Verifi Your Email");
+                    resolve({payload : "Please Verifi Your Email"});
                   }
                 } else {
-                  console.log("somthing went wronge.");
+                  reject({payload : "somthing went wronge."});
                 }
               });
             })
@@ -36,9 +36,9 @@ export const LoginApi = (data) => {
                 const errorMessage = error.message;
 
                 if(errorCode.localeCompare("auth/email-already-in-use") === 0){
-                    console.log("email already registered.");
+                    reject({payload : "email already registered."});
                 }else{
-                  console.log(errorCode);
+                  reject({payload :errorCode });
                 }       
             }); 
     })

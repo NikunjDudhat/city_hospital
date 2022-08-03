@@ -136,6 +136,7 @@ function Login(props) {
                                                 name="email"
                                                 placeholder="Enter Email"
                                                 type="email"
+                                                defaultValue="mehul6540d@gmail.co"
                                                 onChange={formik.handleChange}
                                             />
                                             {
@@ -152,6 +153,7 @@ function Login(props) {
                                                 name="password"
                                                 placeholder="password"
                                                 type="password"
+                                                defaultValue="12345678"
                                                 onChange={formik.handleChange}
                                             />
                                             {

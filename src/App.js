@@ -16,6 +16,8 @@ import ListData from './Container/Appointment/ListData';
 import { Provider } from 'react-redux'
 import Counter from './Container/Counter/Counter';
 import { countorStore } from './Redux/Store';
+import { SnackbarProvider } from 'notistack';
+
 
 
 function App() {
@@ -24,21 +26,23 @@ function App() {
 
   return (
     <>
-    <Provider store={store }>
-      <Header />
-      <Switch>
-        <PublicRoute exact path="/" component={Home} />
-        <PublicRoute exact path="/Department" component={Department} />
-        <PublicRoute exact path="/Doctors" component={Doctor} />
-        <PrivateRoute exact path="/About" component={About} />
-        <PublicRoute exact path="/Contact" component={Contact} />
-        <PublicRoute exact path="/Counter" component={Counter} />
-        <PublicRoute  restricted={true} exact path="/Login" component={Login} />
-        <PrivateRoute exact path="/Appointment" component={Appointment} />
-        <PrivateRoute exact path="/List_data" component={ListData} />
-      </Switch>
-      <Footer />
-    </Provider>
+    <SnackbarProvider maxSnack={3}>
+      <Provider store={store }>
+        <Header />
+        <Switch>
+          <PublicRoute exact path="/" component={Home} />
+          <PublicRoute exact path="/Department" component={Department} />
+          <PublicRoute exact path="/Doctors" component={Doctor} />
+          <PrivateRoute exact path="/About" component={About} />
+          <PublicRoute exact path="/Contact" component={Contact} />
+          <PublicRoute exact path="/Counter" component={Counter} />
+          <PublicRoute  restricted={true} exact path="/Login" component={Login} />
+          <PrivateRoute exact path="/Appointment" component={Appointment} />
+          <PrivateRoute exact path="/List_data" component={ListData} />
+        </Switch>
+        <Footer />
+      </Provider>
+    </SnackbarProvider>
     </>
   );
 }
