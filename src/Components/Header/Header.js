@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import Alert from '../Alert/Alert';
 
 function Header(props) {
     const [userLogin, setuserLogin] = useState(false);
@@ -74,6 +75,7 @@ function Header(props) {
                         <span className="d-none d-md-inline">Login/ Signup</span>
                     </NavLink>
                 </div>
+                <Alert />
             </header>
         </div>
     );

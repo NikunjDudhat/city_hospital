@@ -1,6 +1,7 @@
 import { useSnackbar } from 'notistack';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { resetAlert } from '../../Redux/Action/alert.action';
 
 function Alert(props) {
 
@@ -10,14 +11,16 @@ function Alert(props) {
 
     useEffect(() => {
         if(alert.text !== ""){  
-            enqueueSnackbar(alert, {
+            enqueueSnackbar(alert.text, {
+                variant: alert.color,
                 anchorOrigin: {
-                  vertical: 'error',
-                  horizontal: 'left'
+                  vertical: 'top',
+                  horizontal: 'right'
                 }
               })
-        }
-    },[])
+            }
+            setTimeout( dispatch(resetAlert()), 1000);
+    },[alert.text])
 
     return (
         <div>
