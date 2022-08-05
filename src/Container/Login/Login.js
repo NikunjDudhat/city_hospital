@@ -49,7 +49,7 @@ function Login(props) {
 
     // const schema = yup.object().shape(Login);
     const handleLogin = (v) => {
-        sessionStorage.setItem("user", "123");
+        // sessionStorage.setItem("user", "123");
         dispatch(LoginUser(v));        
     }
 
@@ -136,7 +136,7 @@ function Login(props) {
                                                 name="email"
                                                 placeholder="Enter Email"
                                                 type="email"
-                                                defaultValue="mehul6540d@gmail.co"
+                                                defaultValue="mehul6540d@gmail.com"
                                                 onChange={formik.handleChange}
                                             />
                                             {
