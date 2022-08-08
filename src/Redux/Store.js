@@ -9,9 +9,12 @@ const sagaMiddleware = createSagaMiddleware()
 
 
 const middlewares = [thunk, sagaMiddleware]
-export const countorStore = () => {
+const countorStore = () => {
  let store = createStore(rootRedux, applyMiddleware(...middlewares))
 
  sagaMiddleware.run(rootSaga)
  return store;
 }
+
+
+export const store = countorStore();

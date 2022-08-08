@@ -15,19 +15,17 @@ import PublicRoute from './Route/PublicRoute';
 import ListData from './Container/Appointment/ListData';
 import { Provider } from 'react-redux'
 import Counter from './Container/Counter/Counter';
-import { countorStore } from './Redux/Store';
+import { store } from './Redux/Store';
 import { SnackbarProvider } from 'notistack';
 
 
 
 function App() {
 
-  let store = countorStore()
-
   return (
     <>
     <SnackbarProvider maxSnack={3}>
-      <Provider store={store }>
+      <Provider store={store}>
         <Header />
         <Switch>
           <PublicRoute exact path="/" component={Home} />
