@@ -7,8 +7,19 @@ export const LoginApi = (data) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((user) => {
         console.log(user);
-      }).catch((e) => {
-        console.log(e);
+        if(user.user.emailVerified){
+          resolve({payload: user.user})
+        } else{
+          reject({payload : "Please Verifi Your Email"})
+        }
+      }).catch((error) => {
+        if(error.code.localeCompare('auth/user-not-found') === 0){
+          reject({payload: "Please Email Registered"})
+        } else if(error.code.localeCompare('auth/wrong-password') === 0){
+          reject({payload: "Wrong email or password"})
+        }else{
+          reject({payload: error})
+        }
       })
   })
 }

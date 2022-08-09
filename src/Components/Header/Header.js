@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Alert from '../Alert/Alert';
 
 function Header(props) {
     const [userLogin, setuserLogin] = useState(false);
+    const authUser = useSelector(state => state.auth)
+
+    // console.log(authUser.user.payload.emailVerified);
 
     useEffect(
         ()=>{
@@ -72,6 +76,7 @@ function Header(props) {
                         <span className="d-none d-md-inline">Login/ Signup</span>
                     </a> */}
                     <NavLink to={"/Login"} className="appointment-btn scrollto">
+                        {/* <span className="d-none d-md-inline">{authUser.user.payload.emailVerified === true ? "LogOut" : "Login/ Signup"}</span> */}
                         <span className="d-none d-md-inline">Login/ Signup</span>
                     </NavLink>
                 </div>
