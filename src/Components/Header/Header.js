@@ -76,8 +76,7 @@ function Header(props) {
                         <span className="d-none d-md-inline">Login/ Signup</span>
                     </a> */}
                     <NavLink to={"/Login"} className="appointment-btn scrollto">
-                        {/* <span className="d-none d-md-inline">{authUser.user.payload.emailVerified === true ? "LogOut" : "Login/ Signup"}</span> */}
-                        <span className="d-none d-md-inline">Login/ Signup</span>
+                        <span className="d-none d-md-inline">{authUser.user === null ? "Login/ Signup" : "LogOut"}</span>
                     </NavLink>
                 </div>
                 <Alert />
