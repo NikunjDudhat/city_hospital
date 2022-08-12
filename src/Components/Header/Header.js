@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { LogoutUser } from '../../Redux/Action/auth.action';
 import Alert from '../Alert/Alert';
 
 function Header(props) {
     const [userLogin, setuserLogin] = useState(false);
     const authUser = useSelector(state => state.auth)
+    const dispatch = useDispatch();
 
-    // console.log(authUser.user.payload.emailVerified);
+
+    const handleLogout = () => {
+        console.log("sdb");
+        dispatch(LogoutUser());
+    }
 
     useEffect(
         ()=>{
@@ -75,9 +81,13 @@ function Header(props) {
                     {/* <a href="#" className="appointment-btn scrollto">
                         <span className="d-none d-md-inline">Login/ Signup</span>
                     </a> */}
+                    {authUser.user === null ? 
                     <NavLink to={"/Login"} className="appointment-btn scrollto">
-                        <span className="d-none d-md-inline">{authUser.user === null ? "Login/ Signup" : "LogOut"}</span>
-                    </NavLink>
+                        <span className="d-none d-md-inline">Login/ Signup</span>
+                    </NavLink> :
+                    <NavLink onClick={() => handleLogout()} to={"/Login"} className="appointment-btn scrollto">
+                        <span className="d-none d-md-inline">LogOut</span> 
+                    </NavLink> }
                 </div>
                 <Alert />
             </header>

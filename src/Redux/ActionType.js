@@ -5,6 +5,8 @@ export const SIGNUP_USER = "SIGNUP_USER"
 export const LOGIN_USER = "LOGIN_USER"
 export const EMAIL_VERIFY = "EMAIL_VERIFY"
 export const LOGGIN_USER = "LOGGIN_USER"
+export const LOGOUT_USER = "LOGOUT_USER"
+export const LOGGOUT_USER = "LOGGOUT_USER"
 
 export const SET_ALERT = "SET_ALERT"
 export const RESET_ALERT = "RESET_ALERT"
