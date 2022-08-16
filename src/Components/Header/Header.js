@@ -11,7 +11,6 @@ function Header(props) {
 
 
     const handleLogout = () => {
-        console.log("sdb");
         dispatch(LogoutUser());
     }
 
@@ -86,7 +85,7 @@ function Header(props) {
                         <span className="d-none d-md-inline">Login/ Signup</span>
                     </NavLink> :
                     <NavLink onClick={() => handleLogout()} to={"/Login"} className="appointment-btn scrollto">
-                        <span className="d-none d-md-inline">LogOut</span> 
+                        <span className="d-none d-md-inline">Logout</span> 
                     </NavLink> }
                 </div>
                 <Alert />

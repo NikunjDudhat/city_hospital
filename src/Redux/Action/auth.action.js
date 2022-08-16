@@ -16,6 +16,10 @@ export const LogoutUser = () => (dispatch) => {
     dispatch({type : ActionType.LOGOUT_USER})
 }
 
+export const GoogleUser = () => (dispatch) => {
+    dispatch({type : ActionType.GOOGLE_USER})
+}
+
 
 export const LoggoutUser = () => (dispatch) => {
     dispatch({type : ActionType.LOGGOUT_USER})

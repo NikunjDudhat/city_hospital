@@ -34,7 +34,6 @@ function Appointment(props) {
             if(update){
                 handleUpdate(values)
             } else{
-                console.log(values);
                 const {
                     id,
                     name,
@@ -61,7 +60,6 @@ function Appointment(props) {
                     appoinData.push(Data)
                     localStorage.setItem("appointment", JSON.stringify(appoinData))
                 }
-                console.log(Data);
 
                 resetForm();
                 history.push("/List_data");
@@ -71,25 +69,20 @@ function Appointment(props) {
 
     const {handleChange, handleSubmit,handleBlur, values, errors, touched} = formik;
 
-    console.log(errors);
 
     const EditData = () => {
         let localData = JSON.parse(localStorage.getItem('appointment'));
 
         if(localData !== null && props.location.state){
             let UFilter = localData.filter((u) => u.id === props.location.state.id)
-            console.log(UFilter);
             formik.setValues(UFilter[0])
             setUpdate(true)
         }        
     }
 
     const handleUpdate = (data) => {
-        console.log(data);
 
         let localData = JSON.parse(localStorage.getItem("appointment"));
-
-        console.log(localData);
 
         // let ufd = localData.map((u) => id == id)
 

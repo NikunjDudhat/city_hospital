@@ -30,7 +30,6 @@ function ListData(props) {
       };
 
     const handleClickDOpen = (id) => {
-        console.log(id);
 
         setDOpen(true);
         setDid(id);
@@ -38,7 +37,6 @@ function ListData(props) {
     }
 
     const handleDelete = () => {
-        console.log(Did);
        let localData = JSON.parse(localStorage.getItem("appointment"));
 
        let DFilter = localData.filter((d,i) => d.id != Did);
@@ -50,7 +48,6 @@ function ListData(props) {
 
     const handleClickEOpen = (id) => {
         history.push("/Appointment", {"id" : id});
-        console.log(id);
     }
 
     useEffect(

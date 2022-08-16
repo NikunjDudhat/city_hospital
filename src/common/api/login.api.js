@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, reload, sendEmailVerification, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, reload, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from "../../Firebase";
 
 
@@ -6,7 +6,6 @@ export const LoginApi = (data) => {
   return new Promise((resolve, reject) => {
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((user) => {
-        console.log(user);
         if(user.user.emailVerified){
           resolve({payload: user.user})
         } else{
@@ -27,12 +26,10 @@ export const LoginApi = (data) => {
 
 
 export const SignUpApi = (data) => {
-    console.log(data);
     return new Promise((resolve, reject) => {
         createUserWithEmailAndPassword(auth, data.email, data.password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user);
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
                       sendEmailVerification(user);
@@ -77,5 +74,31 @@ export const LogoutAPI = () => {
       .catch((error) => {
         reject({payload : error.code});
       })
+  })
+}
+
+export const GoogleLoginAPI = () => {
+  return new Promise((resolve, reject) => {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      // The signed-in user info.
+      const user = result.user;
+      resolve({payload : user})
+      // ...
+    }).catch((error) => {
+      // Handle Errors here.
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // The email of the user's account used.
+      const email = error.customData.email;
+      // The AuthCredential type that was used.
+      const credential = GoogleAuthProvider.credentialFromError(error);
+      
+      reject({payload : errorCode});
+    });
   })
 }

@@ -1,5 +1,5 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects'
-import { LoginApi, LogoutAPI, SignUpApi } from '../../common/api/login.api';
+import { GoogleLoginAPI, LoginApi, LogoutAPI, SignUpApi } from '../../common/api/login.api';
 import { history } from '../../history';
 
 import { setAlert } from '../Action/alert.action';
@@ -24,23 +24,33 @@ function* loginsaga(action) {
       history.push('/');
       yield put(setAlert({text: "Login Successfully", color: "success"}))
       yield put(LogginUser(user.user));
-      console.log(user);
    } catch (e){
       yield put(setAlert({text: e.payload, color: "error"}))
-      console.log(e);
    }
 }
 
 function* Logout(action){
    try{
       const user = yield call(LogoutAPI, action.payload)
-      yield put(setAlert({text: user.payload, color: "success"}))
       history.push('/');
       yield put(LoggoutUser(user));
+      yield put(setAlert({text: user.payload, color: "success"}))
    } catch(e){
       yield put(setAlert({text: e.payload, color: "error"}))
    }
 }
+
+function* GoogleLogin(action){
+   try{
+      const user = yield call(GoogleLoginAPI)
+      history.push('/');
+      yield put(setAlert({text: "Login Successfully", color: "success"}))
+      yield put(LogginUser(user.user));
+   } catch (e){
+      yield put(setAlert({text: e.payload, color: "error"}))
+   }
+}
+
 
 function* watchsaga() {
   yield takeEvery(ActionType.LOGIN_USER, loginsaga);
@@ -54,10 +64,15 @@ function* signOutsaga() {
    yield takeEvery(ActionType.LOGOUT_USER, Logout);
 }
 
+function* Googlesaga() {
+   yield takeEvery(ActionType.GOOGLE_USER, GoogleLogin);
+}
+
 export function* loginSagaCall () {
     yield all ([
       watchsaga(),
       signInsaga(),
-      signOutsaga()
+      signOutsaga(),
+      Googlesaga()
    ])
 }

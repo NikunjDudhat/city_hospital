@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button, FormGroup, Input, Label } from 'reactstrap';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { LoginUser, SignUpUser } from '../../Redux/Action/auth.action';
+import { GoogleUser, LoginUser, SignUpUser } from '../../Redux/Action/auth.action';
 
 function Login(props) {
     const [useType, setUseType] = useState("Login");
@@ -57,6 +57,10 @@ function Login(props) {
         dispatch(SignUpUser(value));
     }
 
+    const GoogleLogin = () => {
+        dispatch(GoogleUser())
+    }
+
     const formik = useFormik({
         initialValues: initiValue,
         validationSchema: schema,
@@ -64,13 +68,10 @@ function Login(props) {
             // alert(JSON.stringify(values, null, 2));
 
             if (useType === "Login") {
-                // console.log("Successfully Login 👍");
                 handleLogin(values);
             } else if (useType === "SignUp") {
                 handleSignUp(values);
-                console.log("Successfully SignUp 👍");
             } else if (useType === "forgetPassowrd") {
-                console.log("Successfully Forget Passowrd 👍");
             }
             resetForm()
         },
@@ -187,6 +188,13 @@ function Login(props) {
                                             <Button type='submit' className="appointment-btn scrollto m-0"
                                                 onClick={() => setUseType("Login")}>Login</Button>
                                         </div>
+                                }
+                                {
+                                    useType === 'forgetPassowrd' ? " " :
+                                    <div className="text-center" style={{marginTop : "10px"}}>
+                                        <Button type='button' className="appointment-btn gBtn scrollto m-0" onClick={() => GoogleLogin()}>
+                                        <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/1200px-Google_%22G%22_Logo.svg.png' width="20" style={{marginRight : "5px"}} /> SignIn With Google</Button>
+                                    </div>
                                 }
                             </Form>
                         </Formik>
