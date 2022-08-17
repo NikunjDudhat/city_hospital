@@ -28,3 +28,7 @@ export const LoggoutUser = () => (dispatch) => {
 export const EmailVerify = (user) => (dispatch) => {
     dispatch({type : ActionType.EMAIL_VERIFY, payload : user})
 }
+
+export const ResetPassword = (data) => (dispatch) => {
+    dispatch({type : ActionType.RESET_PASSWORD, payload: data})
+}

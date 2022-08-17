@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, reload, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, reload, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, } from "firebase/auth";
 import { auth } from "../../Firebase";
 
 
@@ -100,5 +100,17 @@ export const GoogleLoginAPI = () => {
       
       reject({payload : errorCode});
     });
+  })
+}
+
+export const ResetPasswordAPI = (data) => {
+  return new Promise((resolve, reject) => {
+    sendPasswordResetEmail(auth, data.email)
+      .then((user) => {
+        resolve({payload: "Please check your email"})
+      })
+      .catch((error) => {
+        reject({payload : error.code});
+      })
   })
 }

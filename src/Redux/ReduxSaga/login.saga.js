@@ -1,5 +1,5 @@
 import { call, put, takeEvery, all } from 'redux-saga/effects'
-import { GoogleLoginAPI, LoginApi, LogoutAPI, SignUpApi } from '../../common/api/login.api';
+import { GoogleLoginAPI, LoginApi, LogoutAPI, ResetPasswordAPI, SignUpApi } from '../../common/api/login.api';
 import { history } from '../../history';
 
 import { setAlert } from '../Action/alert.action';
@@ -51,6 +51,16 @@ function* GoogleLogin(action){
    }
 }
 
+function* Reset(action){
+   try{
+      const user = yield call(ResetPasswordAPI, action.payload)
+      history.push('/');
+      yield put(setAlert({text: user.payload, color: "success"}))
+   }catch(e){
+      yield put(setAlert({text: e.payload, color: "error"}))
+   }
+}
+
 
 function* watchsaga() {
   yield takeEvery(ActionType.LOGIN_USER, loginsaga);
@@ -68,11 +78,17 @@ function* Googlesaga() {
    yield takeEvery(ActionType.GOOGLE_USER, GoogleLogin);
 }
 
+function* ResetPasssaga() {
+   yield takeEvery(ActionType.RESET_PASSWORD, Reset);
+}
+
+
 export function* loginSagaCall () {
     yield all ([
       watchsaga(),
       signInsaga(),
       signOutsaga(),
-      Googlesaga()
+      Googlesaga(),
+      ResetPasssaga()
    ])
 }

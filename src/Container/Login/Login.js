@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button, FormGroup, Input, Label } from 'reactstrap';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
-import { GoogleUser, LoginUser, SignUpUser } from '../../Redux/Action/auth.action';
+import { GoogleUser, LoginUser, ResetPassword, SignUpUser } from '../../Redux/Action/auth.action';
 
 function Login(props) {
     const [useType, setUseType] = useState("Login");
@@ -72,6 +72,7 @@ function Login(props) {
             } else if (useType === "SignUp") {
                 handleSignUp(values);
             } else if (useType === "forgetPassowrd") {
+                dispatch(ResetPassword(values))
             }
             resetForm()
         },
@@ -183,7 +184,7 @@ function Login(props) {
                                         <div className="text-center">
                                             <Button type='submit' className="appointment-btn scrollto m-0">
                                                 {
-                                                    useType === 'forgetPassowrd' ? "Send OPT" : "Sign Up"
+                                                    useType === 'forgetPassowrd' ? "Send Email" : "Sign Up"
                                                 }</Button>
                                             <Button type='submit' className="appointment-btn scrollto m-0"
                                                 onClick={() => setUseType("Login")}>Login</Button>
